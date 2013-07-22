@@ -20,14 +20,13 @@ class sql {
 		if ((isset($php_errormsg) && substr($php_errormsg, 0, 27) == "Error while sending QUERY packet.") || self::$sql->error == "MySQL server has gone away") {
 			self::$sql->close();
 			self::$sql = NULL; // prevents infinite recursion which ends with an excessive use of memory...
-			#while (!self::$sql->ping())
 			usleep(1000); // reconnect on error!
 			goto start;
 		}
 		if (!self::$errors)
 			return false;
 
-		error(E_USER_ERROR, "<b>MySQL:</b> ".self::$sql->error);
+		trigger_error("<b>MySQL:</b> ".self::$sql->error, E_USER_ERROR);
 		exit;
 	}
 
