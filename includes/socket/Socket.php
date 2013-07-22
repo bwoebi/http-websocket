@@ -8,7 +8,7 @@ abstract class Socket {
 	function Socket ($address, $port) {
 		$this->master = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or kill(trigger_error("socket_create() failed", E_USER_ERROR));
 		socket_set_option($this->master, SOL_SOCKET, SO_REUSEADDR, true) or kill(trigger_error("socket_option() failed", E_USER_ERROR));
-		socket_bind($this->master, $address, $port) or kill(trigger_error("socket_bind() failed"), E_USER_ERROR);
+		socket_bind($this->master, $address, $port) or kill(trigger_error("socket_bind() failed", E_USER_ERROR));
 		socket_listen($this->master, 20) or kill(trigger_error("socket_listen() failed", E_USER_ERROR));
 		socket_set_nonblock($this->master);
 		$this->sockets[0] = $this->master;
