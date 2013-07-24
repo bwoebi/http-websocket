@@ -1,6 +1,7 @@
 <?php
 
 const
+	DB_CLASS = "rawFiles",
 	SQL_USER = "",
 	SQL_PASS = "",
 	SQL_NAME = "",
@@ -14,7 +15,7 @@ const
 
 const
 	DAEMON_PORT_LISTEN  = 8989,
-	DAEMON_HTTP_ADDR_LISTEN  = 'localhost',
+	DAEMON_HTTP_ADDR_LISTEN  = 'websocketpoll.local',
 	DAEMON_ADDR_LISTEN  = '0.0.0.0',
 	DAEMON_SLEEP_TIME   = 5, // milliseconds
 	DAEMON_SOCKET_BYTES = 65536;
@@ -26,5 +27,4 @@ const
 
 // DON'T SET IT LOWER THAN 0.5; WILL CAUSE THE LOAD TO SKYROCKET
 const
-	MAX_SOCKET_SLEEP_TIME = 2; // milliseconds
-
+	MAX_SOCKET_SLEEP_TIME = 100;//2; // milliseconds

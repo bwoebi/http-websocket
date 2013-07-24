@@ -1,17 +1,25 @@
 <?php
 
-require 'includes/constants.php';
+include "includes/User.php";
 
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
-		<script type="text/javascript" src="js/socket.js"></script>
-		<script type="text/javascript">
-			socket = new socketPollHandler("<?=DAEMON_HTTP_ADDR_LISTEN?>", "<?=DAEMON_PORT_LISTEN?>");
-			socket.start();
-		</script>
+		<title>Http-WebSocket</title>
 	</head>
 	<body>
+		<form action="general.php" method="post">
+			<h3>Sign in</h3>
+			Name: <input type="text" name="name" /><br />
+			Password: <input type="text" name="pass" /><br />
+			<input type="submit" value="Login" />
+		</form>
+		<form action="general.php" method="post">
+			<h3>Sign up</h3>
+			Name: <input type="text" name="name" /><br />
+			Password: <input type="text" name="pass" /><br />
+			Repeat Password: <input type="text" name="pass_repeat" /><br />
+			<input type="submit" value="Submit" />
+		</form>
 	</body>
 </html>

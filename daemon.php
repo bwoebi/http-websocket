@@ -1,5 +1,21 @@
 <?php
 
+// Uncomment to enable function call tracing
+declare(ticks=1);
+register_tick_function(function(){
+	static $func;
+	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+	if (count($bt) > 1)
+		if (((string)$func) != ($func = @$bt[1]["class"].@$bt[1]["type"].@$bt[1]["function"])) {
+			$file = isset($bt[0]["file"], $bt[0]["line"])?$bt[0]["file"].":".$bt[0]["line"]:"";
+			print "BT: ".$func." ($file)\n";
+		}
+});
+
+define('DAEMON_PID', posix_getpid());
+
+define('BASE_PATH', __DIR__);
+
 require __DIR__.'/includes/constants.php';
 
 require __DIR__.'/includes/threads/pthreads.php';
@@ -9,18 +25,16 @@ require __DIR__.'/includes/threads/WebSocketThread.php';
 
 require __DIR__.'/includes/socket/WebSocketPoll.php';
 
-require __DIR__.'/includes/sql.php';
+require __DIR__.'/includes/db.php';
 require __DIR__.'/includes/User.php';
 
 include 'includes/handlers.php';
-
-define('DAEMON_PID', posix_getpid());
 
 function kill () { posix_kill(DAEMON_PID, SIGKILL); } // problem is that die() may cause segfaults...
 
 @cli_set_process_title(PROC_TITLE); // creates sometimes a warning even when it works...
 
-sql::init();
+db::init();
 
 $stack = new DaemonData($handlers);
 

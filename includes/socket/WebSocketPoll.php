@@ -88,7 +88,7 @@ class WebSocketPoll extends Socket {
 					return;
 			}
 
-			$user->user_id = $data["id"];
+			$user->user_id = $id;
 			$user->session_id = $cookies->cookies[session_name()];
 		}
 	}
