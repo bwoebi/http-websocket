@@ -1,6 +1,13 @@
 http-websocket
 ==============
 
+Needed extensions
+-----------------
+
+ - [pthreads](https://github.com/krakjoe/pthreads)
+ - [pecl_http](http://pecl.php.net/package/pecl_http)
+ - (posix (just needed in error conditions for cleaner shutdown instead of segmentation fault))
+
 Setup
 -----
 
