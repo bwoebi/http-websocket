@@ -91,6 +91,11 @@ class rawFiles implements dbLayer {
 				for ($i = 0; $i < count($cond->right); $i++)
 					$retval = $retval && self::verifyCond($row, $cond, $cond->right[$i]);
 				return $retval;
+			case "xor":
+				$retval = self::verifyCond($row, $cond->left);
+				for ($i = 0; $i < count($cond->right); $i++)
+					$retval = $retval XOR self::verifyCond($row, $cond, $cond->right[$i]);
+				return $retval;
 		}
 	}
 
@@ -112,11 +117,9 @@ class rawFiles implements dbLayer {
 			});
 		}
 
-		if (!$fields)
-			return new rawFilesResult($rows);
-
-		foreach ($rows as &$row)
-			$row = array_reduce($fields, function ($result, $field) use ($row) { $result[$field] = $row[$field]; return $result; }, []);
+		if ($fields !== false)
+			foreach ($rows as &$row)
+				$row = array_reduce($fields, function ($result, $field) use ($row) { $result[$field] = $row[$field]; return $result; }, []);
 
 		return new rawFilesResult($rows);
 	}
