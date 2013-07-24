@@ -6,23 +6,9 @@ Setup
 
 Just some little example of a threaded websocket/http server.
 
-To make it work, put your setup into includes/constants.php and create two tables:
+To make it work, put your setup into includes/constants.php.
 
-```
-+-------------------+
-| users             |
-+-------------------+
-| id | other fields |
-+-------------------+
-```
-
-```
-+-----------------+
-| session         |
-+-----------------+
-| id | session_id |
-+-----------------+
-```
+If you want to use file based storage, make sure that the `includes/databases/rawFiles` directory contents are writable by the `index.php`/`general.php` and `daemon.php` executing user.
 
 Run it
 ------
