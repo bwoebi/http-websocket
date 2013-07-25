@@ -1,6 +1,6 @@
 <?php
  
-class MySql implements dbLayer {
+class MySQL implements dbLayer {
 	const CONNECTION_CLOSED = "MySQL server has gone away";
 	const WRITE_FAILURE = "Error while sending QUERY packet.";
 
@@ -117,5 +117,9 @@ class MySql implements dbLayer {
 
 	public static function affected_rows ($db) {
 		return $db->affected_rows;
+	}
+
+	public static function close ($db) {
+		return $db->close();
 	}
 }
