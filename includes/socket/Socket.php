@@ -74,7 +74,7 @@ abstract class Socket {
 		return $ret;
 	}
 
-	abstract public function inputHandler($user, &$buffer);
+	abstract public function inputHandler ($user, &$buffer);
 
 	public function emit ($user, $data) {
 		print "> @".$user->user_id." ".$data."\n";
@@ -82,9 +82,11 @@ abstract class Socket {
 
 		while (true) {
 			$sent = @socket_write($user->socket, $data, $len);
-			if($sent <= 0)
+
+			if ($sent <= 0)
 				break;
-			if($sent < $len) {
+
+			if ($sent < $len) {
 				$msg = substr($data, $sent);
 				$len -= $sent;
 			} else
